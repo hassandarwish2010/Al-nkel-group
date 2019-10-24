@@ -14,12 +14,16 @@
     @auth
         <?php
         $user_id=Auth::user()->id;
-        $row=\App\UserMessages::where(['user_id'=>$user_id,'status'=>0])->orderBy('created_at','desc')->first()?>
+        $row=\App\UserMessages::where(['user_id'=>$user_id,'status'=>0])->orderBy('created_at','desc')->first()
+        //$title='title_'.App::getLocale();
+        ?>
+{{--        {{dd(App::getLocale())}}--}}
+
     @if ($row)
         <div class="msg">
             <p class="title-msg mt-2" >@lang('elnkel.have_msg')</p>
             <hr>
-            <p class="m-4">{{\App\Message::where('id',$row->message_id)->first()->title}}</p>
+            <p class="m-4">{{\App\Message::where('id',$row->message_id)->first()->title_en}}</p>
             <input type="button " class="read mb-4 mt-4" value="@lang('elnkel.read_msg')">
         </div>
     @endif

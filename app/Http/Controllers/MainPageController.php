@@ -104,7 +104,8 @@ class MainPageController extends Controller {
 //            ->join('charter_passengers_related as chpr',[ 'o.id', '=', 'chpr.order_id','ch.id', '=', 'chpr.passenger_id'])
 //            ->get();
         $rows=DB::table('charter_passengers_related as chpr')->join('charter_orders as o', 'chpr.order_id', '=', 'o.id')
-            ->join('charter_passengers as ch', 'chpr.passenger_id', '=', 'ch.id');
+            ->join('charter_passengers as ch', 'chpr.passenger_id', '=', 'ch.id')
+            ->join('charter as charter', 'o.charter_id', '=', 'charter.id');
           if($request->ticket_num) $rows=$rows->where('ticket_number', 'LIKE', "%$request->ticket_num%");
           if($request->pnr) $rows=$rows->where('pnr', 'LIKE', "%$request->pnr%");
           if($request->first_name) $rows=$rows->where('first_name', 'LIKE', "%$request->first_name%");

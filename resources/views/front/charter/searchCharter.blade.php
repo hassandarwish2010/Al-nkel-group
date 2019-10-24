@@ -98,7 +98,7 @@
                             <th>@lang('alnkel.ticket_number')</th>
                             <th>@lang('alnkel.flight_class')</th>
                             <th>@lang('alnkel.created_at')</th>
-                            <th>@lang('alnkel.age')</th>
+                            <th>@lang('alnkel.flight_date')</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -110,7 +110,7 @@
                                 <td class="">{{$row->ticket_number}}</td>
                                 <td class="">{{$row->flight_class}}</td>
                                 <td class="">{{\Carbon\Carbon::parse($row->created_at)->format('d/m/Y')}}</td>
-                                <td class="">{{$row->age}}</td>
+                                <td class="">{{$row->flight_date}}</td>
 
                         </tr>
                         @endforeach

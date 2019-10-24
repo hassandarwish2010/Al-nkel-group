@@ -212,8 +212,8 @@ return [
     'created_at'=>'Created At',
     'age'=>'Age',
     'history'=>'Transactions History',
-    ''=>'',
-    ''=>'',
-    ''=>'',
+    'flight_date'=>'Flight Date',
+    'open_r_Validity'=>'Open Return',
+    'baby'=>'Baby',
     ''=>'',
 ];
