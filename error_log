@@ -1,0 +1,37 @@
+[18-Feb-2019 19:20:43 UTC] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/alnkhel/public_html/storage/framework/views/8bb9a7122d204169e028ce5f2e25f934e3102b04.php on line 459
+[20-Feb-2019 16:29:51 UTC] PHP Fatal error:  Method Illuminate\View\View::__toString() must not throw an exception, caught ErrorException: Parse error: syntax error, unexpected '--' (T_DEC) (View: /home/alnkhel/public_html/resources/views/front/charter/ticket.blade.php) in /home/alnkhel/public_html/vendor/phpoffice/phpword/src/PhpWord/Shared/Html.php on line 64
+[21-Mar-2019 11:24:27 UTC] PHP Warning:  Unterminated comment starting line 1444 in /home/alnkhel/public_html/app/Http/Controllers/MainPageController.php on line 1444
+[27-Mar-2019 15:11:06 UTC] PHP Parse error:  syntax error, unexpected ''/guzzlehttp/promises/s' (T_ENCAPSED_AND_WHITESPACE) in /home/alnkhel/public_html/vendor/composer/autoload_static.php on line 1272
+[01-Apr-2019 16:56:19 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 524304384 bytes) in /home/alnkhel/public_html/storage/framework/views/a49a935a949e1af8a15b3e05d66357cde78429a5.php on line 156
+[01-Apr-2019 16:56:19 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes) in /home/alnkhel/public_html/vendor/symfony/debug/Exception/FlattenException.php on line 250
+[01-Apr-2019 16:56:19 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 524312576 bytes) in Unknown on line 0
+[01-Apr-2019 16:56:47 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 524304384 bytes) in /home/alnkhel/public_html/storage/framework/views/a49a935a949e1af8a15b3e05d66357cde78429a5.php on line 156
+[01-Apr-2019 16:56:47 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes) in /home/alnkhel/public_html/vendor/symfony/debug/Exception/FlattenException.php on line 250
+[01-Apr-2019 16:56:47 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 524312576 bytes) in Unknown on line 0
+[01-Apr-2019 16:57:21 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 524304384 bytes) in /home/alnkhel/public_html/storage/framework/views/a49a935a949e1af8a15b3e05d66357cde78429a5.php on line 156
+[01-Apr-2019 16:57:21 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 20480 bytes) in /home/alnkhel/public_html/vendor/symfony/debug/Exception/FlattenException.php on line 250
+[01-Apr-2019 16:57:21 UTC] PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted (tried to allocate 524312576 bytes) in Unknown on line 0
+[03-Apr-2019 00:27:54 UTC] PHP Warning:  symlink() has been disabled for security reasons in /home/alnkhel/public_html/symlinkcreate.php on line 2
+[21-May-2019 19:31:16 UTC] PHP Warning:  require_once(/home/alnkhel/public_html/public/index.php): failed to open stream: No such file or directory in /home/alnkhel/public_html/server.php on line 21
+[21-May-2019 19:31:16 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/alnkhel/public_html/public/index.php' (include_path='.:/opt/cpanel/ea-php70/root/usr/share/pear') in /home/alnkhel/public_html/server.php on line 21
+[26-May-2019 22:29:11 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[26-May-2019 22:29:20 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[06-Jul-2019 17:20:52 Africa/Cairo] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
