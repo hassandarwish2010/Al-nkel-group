@@ -18,17 +18,18 @@
         <ul class="nav nav-tabs nav-sty">
             <li ><a data-toggle="tab" href="#one_way">@lang('alnkel.one_way')</a></li>
             <li><a data-toggle="tab" href="#return">@lang('alnkel.return')</a></li>
-            <li><a data-toggle="tab" href="#multi_city">@lang('alnkel.multi_city')</a></li>
-            <li><a data-toggle="tab" href="#open_return">@lang('alnkel.open_return')</a></li>
+{{--            <li><a data-toggle="tab" href="#multi_city">@lang('alnkel.multi_city')</a></li>--}}
+{{--            <li><a data-toggle="tab" href="#open_return">@lang('alnkel.open_return')</a></li>--}}
             {{--                <li style="float: right;"><a data-toggle="tab" >@lang('alnkel.availability')</a></li>--}}
         </ul>
 
         <div class="row">
+            <form action="" method="">
             <div class="col-sm-5">
                 <div class="tab-content">
                     <div id="one_way" class="tab-pane fade in active">
                         <div class="row p-4">
-                            <div class="co-sm-5">
+                            <div class="co-sm-5 width50">
                                 <p class=" mt-2">@lang('alnkel.from') *</p>
                                 <select class="form-control sel-status" name="from">
                             @foreach($countries as $country)
@@ -40,7 +41,7 @@
  
                             </div>
                             <div class="col-sm-1"></div>
-                            <div class="co-sm-5">
+                            <div class="co-sm-5 width50">
                                 <p class=" mt-2">@lang('alnkel.to') *</p>
                        
                             <select class="form-control sel-status" name="to">
@@ -52,7 +53,7 @@
                             </select>
  
                             </div>
-                            <div class="co-sm-5">
+                            <div class="co-sm-5 ">
                                 <p class="mt-4">@lang('alnkel.departure') *</p>
                                 <input type="date" name="to"><span><select name="available" class="select-opt">
                                             <option value="">0</option>
@@ -65,7 +66,7 @@
                     </div>
                     <div id="return" class="tab-pane fade ">
                         <div class="row p-4">
-                            <div class="co-sm-5">
+                            <div class="co-sm-5 width50">
                                 <p class=" mt-2">@lang('alnkel.from') *</p>
                                 <select class="form-control sel-status">
                             @foreach($countries as $country)
@@ -77,7 +78,7 @@
  
                             </div>
                             <div class="col-sm-1"></div>
-                            <div class="co-sm-5">
+                            <div class="co-sm-5 ">
                                 <p class=" mt-2">@lang('alnkel.to') *</p>
                                 <select class="form-control sel-status" name="to">
                             @foreach($countries as $country)
@@ -165,40 +166,24 @@
                         <input type="number" name="children" class="sty-option" min="0">
                     </div>
                     <div class="">
-                        <p class="mt-4">@lang('alnkel.Infants') </p>
+                        <p class="mt-4">@lang('alnkel.baby') </p>
                         <input type="number" name="infants" class="sty-option" min="0">
                     </div>
-                    <div class="">
+                    <div class="width50">
                         <p class="mt-4">@lang('alnkel.cabin_class') </p>
                         <select name="cabin_class">
-                            <option value=""></option>
-                            <option value="economy">Y-Economy</option>
-                            <option value="business">c-Business</option>
+                            <option value="economy">Economy</option>
+                            <option value="business">Business</option>
                         </select>
                     </div>
-                    <div class="">
-                        <p class="mt-4">@lang('alnkel.Currency') </p>
-                        <select name="currency">
-                            <option value="AZN">AZN - Azerbaijani manat</option>
-                            <option value="IQD">IQD - Iraqi Dinar</option>
-                            <option value="JOD">JOD - Jordanian Dinar</option>
-                            <option value="LBP">LBP - Lebanese Pound</option>
-                            <option value="TRY">TRY - Turkish Lira</option>
-                            <option value="USD">USD - US Dollar</option>
-                        </select>
-                    </div>
-                    <div class="">
-                        <p class="mt-4">@lang('alnkel.Availability_View') </p>
-                        <select name="view">
-                            <option value="FRV">Full Availability</option>
-                            <option value="FPV">Fare Product</option>
-                        </select>
-                    </div>
-                    <div class="radio">
-                        <input type="radio"  name="passport">Passport Visa Search
-                    </div>
+
+
+
                 </div>
             </div>
+           <div class="col-sm-12">
+               <input type="submit" class=" btn btn-success p-3" value="@lang('alnkel.search')">
+           </div>
         </div>
     </div>
 
@@ -211,6 +196,9 @@
     <style>
         body{
             background-color: #ececec;;
+        }
+        .width50{
+            width: 40%;
         }
         .radio{
             margin-top: 42px;
