@@ -91,7 +91,8 @@ class MainPageController extends Controller {
 	}
 
 	public function charterCreate(){
-	    return view('front.charter.createCharter');
+		$countries = Country::all();
+	    return view('front.charter.createCharter',compact('countries'));
     }//end charterCreate
 
     public function charterSearch(){
