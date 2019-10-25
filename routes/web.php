@@ -295,7 +295,7 @@ Route::group( [ 'prefix' => 'profile' ], function () {
 		} );
 	} );
 } );
-
+Route::post( '/oneWay/charter/search', 'MainPageController@searchCharter' );
 Route::group( [
 	'prefix'     => LaravelLocalization::setLocale(),
 	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
@@ -304,6 +304,7 @@ Route::group( [
 	Route::get( '/flights', 'MainPageController@flights' )->name( 'flights' );
 	Route::get( '/flights/{flight}', 'MainPageController@singleFlight' )->name( 'singleFlight' );
 	Route::get( '/charter', 'MainPageController@charter' )->name( 'charter' );
+
 	Route::get( '/charter-create', 'MainPageController@charterCreate' )->name( 'charter.create' )->middleware('auth');
 	Route::get( '/charter-search', 'MainPageController@charterSearch' )->name( 'charter.search' )->middleware('auth');
 	Route::post( '/charter-search', 'MainPageController@getSearchresult' )->name( 'get.result' )->middleware('auth');;

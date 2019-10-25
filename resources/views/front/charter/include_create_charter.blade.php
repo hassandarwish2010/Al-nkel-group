@@ -15,178 +15,273 @@
 <section>
     <div class="container">
 
-        <ul class="nav nav-tabs nav-sty">
-            <li ><a data-toggle="tab" href="#one_way">@lang('alnkel.one_way')</a></li>
-            <li><a data-toggle="tab" href="#return">@lang('alnkel.return')</a></li>
-{{--            <li><a data-toggle="tab" href="#multi_city">@lang('alnkel.multi_city')</a></li>--}}
-{{--            <li><a data-toggle="tab" href="#open_return">@lang('alnkel.open_return')</a></li>--}}
-            {{--                <li style="float: right;"><a data-toggle="tab" >@lang('alnkel.availability')</a></li>--}}
-        </ul>
-
-        <div class="row">
-            <form action="" method="">
-            <div class="col-sm-5">
-                <div class="tab-content">
-                    <div id="one_way" class="tab-pane fade in active">
-                        <div class="row p-4">
-                            <div class="co-sm-5 width50">
-                                <p class=" mt-2">@lang('alnkel.from') *</p>
-                                <select class="form-control sel-status" name="from">
-                            @foreach($countries as $country)
-                            <option value="{{ $country->id }}"
-                                >{{ $country->name['ar'] }}
-                            </option>
-                            @endforeach
-                            </select>
+       
+    <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">One Way</a></li>
+  <li><a data-toggle="tab" href="#menu1">Two Way</a></li>
  
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="co-sm-5 width50">
-                                <p class=" mt-2">@lang('alnkel.to') *</p>
-                       
-                            <select class="form-control sel-status" name="to">
-                            @foreach($countries as $country)
-                            <option value="{{ $country->id }}"
-                                >{{ $country->name['ar'] }}
-                            </option>
-                            @endforeach
-                            </select>
- 
-                            </div>
-                            <div class="co-sm-5 ">
-                                <p class="mt-4">@lang('alnkel.departure') *</p>
-                                <input type="date" name="to"><span><select name="available" class="select-opt">
-                                            <option value="">0</option>
-                                            <option value="">+/-1</option>
-                                            <option value="">+/-2</option>
-                                            <option value="">+/-3</option>
-                                        </select></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="return" class="tab-pane fade ">
-                        <div class="row p-4">
-                            <div class="co-sm-5 width50">
-                                <p class=" mt-2">@lang('alnkel.from') *</p>
-                                <select class="form-control sel-status">
-                            @foreach($countries as $country)
-                            <option value="{{ $country->id }}"
-                                >{{ $country->name['ar'] }}
-                            </option>
-                            @endforeach
-                            </select>
- 
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="co-sm-5 ">
-                                <p class=" mt-2">@lang('alnkel.to') *</p>
-                                <select class="form-control sel-status" name="to">
-                            @foreach($countries as $country)
-                            <option value="{{ $country->id }}"
-                                >{{ $country->name['ar'] }}
-                            </option>
-                            @endforeach
-                            </select>
- 
-                            </div>
-                            <div class="co-sm-5">
-                                <p class="mt-4">@lang('alnkel.departure') *</p>
-                                <input type="date" name="to"><span><select name="available" class="select-opt">
-                                            <option value="">0</option>
-                                            <option value="">+/-1</option>
-                                            <option value="">+/-2</option>
-                                            <option value="">+/-3</option>
-                                        </select></span>
-                            </div>
-                            <div class="co-sm-5">
-                                <p class="mt-4">@lang('alnkel.return') *</p>
-                                <input type="date" name="to"><span><select name="available" class="select-opt">
-                                            <option value="">0</option>
-                                            <option value="">+/-1</option>
-                                            <option value="">+/-2</option>
-                                            <option value="">+/-3</option>
-                                        </select></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="multi_city" class="tab-pane fade">
-                        <div class="row p-4">
-                            <div class="co-sm-5">
-                                <p class=" mt-2">@lang('alnkel.from') *</p>
-                                <input type="date" name="from">
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="co-sm-5">
-                                <p class=" mt-2">@lang('alnkel.to') *</p>
-                                <input type="date" name="to">
-                            </div>
-                            <div class="co-sm-5">
-                                <p class="mt-4">@lang('alnkel.departure') *</p>
-                                <input type="date" name="to"><span><select name="available" class="select-opt">
-                                            <option value="">0</option>
-                                            <option value="">+/-1</option>
-                                            <option value="">+/-2</option>
-                                            <option value="">+/-3</option>
-                                        </select></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="open_return" class="tab-pane fade">
-                        <div class="row p-4">
-                            <div class="co-sm-5">
-                                <p class=" mt-2">@lang('alnkel.from') *</p>
-                                <input type="date" name="from">
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="co-sm-5">
-                                <p class=" mt-2">@lang('alnkel.to') *</p>
-                                <input type="date" name="to">
-                            </div>
-                            <div class="co-sm-5">
-                                <p class="mt-4">@lang('alnkel.departure') *</p>
-                                <input type="date" name="to"><span><select name="available" class="select-opt">
-                                            <option value="">0</option>
-                                            <option value="">+/-1</option>
-                                            <option value="">+/-2</option>
-                                            <option value="">+/-3</option>
-                                        </select></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-7">
-                <div class="row">
-                    <div class="">
-                        <p class="mt-4">@lang('alnkel.Adults') </p>
-                        <input type="number" name="adults" class="sty-option" min="0">
-                    </div>
-                    <div class="">
-                        <p class="mt-4">@lang('alnkel.Children') </p>
-                        <input type="number" name="children" class="sty-option" min="0">
-                    </div>
-                    <div class="">
-                        <p class="mt-4">@lang('alnkel.baby') </p>
-                        <input type="number" name="infants" class="sty-option" min="0">
-                    </div>
-                    <div class="width50">
-                        <p class="mt-4">@lang('alnkel.cabin_class') </p>
-                        <select name="cabin_class">
-                            <option value="economy">Economy</option>
-                            <option value="business">Business</option>
-                        </select>
-                    </div>
+</ul>
 
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <form class="form-inline" action="{{url('/oneWay/charter/search')}}"   method="post">
 
-
-                </div>
-            </div>
-           <div class="col-sm-12">
-               <input type="submit" class=" btn btn-success p-3" value="@lang('alnkel.search')">
-           </div>
+        {{ csrf_field() }}
+        <div class="form-group mb-2">
+        <p class=" mt-2">@lang('alnkel.from') *</p>
+        <select class="form-control sel-status" name="startFrom">
+            @foreach($countries as $country)
+            <option value="{{ $country->id }}"
+                >{{ $country->name['ar'] }}
+            </option>
+            @endforeach
+        </select>
         </div>
+
+       
+
+        <div class="form-group mx-sm-3 mb-2">
+        <p class=" mt-2">@lang('alnkel.to') *</p>
+        
+             <select class="form-control sel-status" name="endTo">
+             @foreach($countries as $country)
+             <option value="{{ $country->id }}"
+                 >{{ $country->name['ar'] }}
+             </option>
+             @endforeach
+             </select>
+        </div>
+
+        <div class="form-group mb-2">
+        <p class=" mt-2">Date *</p>
+        <input type="date" name="traveldate">
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+        <p class="mt-4">@lang('alnkel.departure') *</p>
+        
+        <span><select name="available" class="select-opt">
+                    <option value="0">0</option>
+                    <option value="1">+/-1</option>
+                    <option value="2">+/-2</option>
+                    <option value="3">+/-3</option>
+                </select></span>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+        <p class="mt-4">@lang('alnkel.Adults') </p>
+        <input type="number" name="adults" class="sty-option" min="0">
+        </div>
+
+
+        <div class="form-group mx-sm-3 mb-2">
+        <p class="mt-4">@lang('alnkel.Children') </p>
+        <input type="number" name="children" class="sty-option" min="0">
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+        <p class="mt-4">@lang('alnkel.baby') </p>
+        <input type="number" name="infants" class="sty-option" min="0">
+
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+        <p class="mt-4">@lang('alnkel.cabin_class') </p>
+        <select name="cabin_class">
+            <option value="economy">Economy</option>
+            <option value="business">Business</option>
+        </select>
+        </div>
+
+
+
+
+        <input type="submit" class=" btn btn-success p-3" value="@lang('alnkel.search')">
+        </form>
+  </div>
+  <div id="menu1" class="tab-pane fade">
+  <form class="form-inline" action="{{url('/oneWay/charter/search')}}"   method="post">
+  
+          {{ csrf_field() }}
+
+          <input type="hidden" name="twoway" value="twoway">
+          <div class="form-group mb-2">
+          <p class=" mt-2">@lang('alnkel.from') *</p>
+          <select class="form-control sel-status" name="startFrom">
+              @foreach($countries as $country)
+              <option value="{{ $country->id }}"
+                  >{{ $country->name['ar'] }}
+              </option>
+              @endforeach
+          </select>
+          </div>
+  
+         
+  
+          <div class="form-group mx-sm-3 mb-2">
+          <p class=" mt-2">@lang('alnkel.to') *</p>
+          
+               <select class="form-control sel-status" name="endTo">
+               @foreach($countries as $country)
+               <option value="{{ $country->id }}"
+                   >{{ $country->name['ar'] }}
+               </option>
+               @endforeach
+               </select>
+          </div>
+  
+          <div class="form-group mb-2">
+          <p class=" mt-2">Date *</p>
+          <input type="date" name="traveldate">
+          </div>
+
+          <div class="form-group mb-2">
+          <p class=" mt-2">Return Date *</p>
+          <input type="date" name="returndate">
+          </div>
+  
+          <div class="form-group mx-sm-3 mb-2">
+          <p class="mt-4">@lang('alnkel.departure') *</p>
+          
+          <span><select name="available" class="select-opt">
+                      <option value="0">0</option>
+                      <option value="1">+/-1</option>
+                      <option value="2">+/-2</option>
+                      <option value="3">+/-3</option>
+                  </select></span>
+          </div>
+  
+          <div class="form-group mx-sm-3 mb-2">
+          <p class="mt-4">@lang('alnkel.Adults') </p>
+          <input type="number" name="adults" class="sty-option" min="0">
+          </div>
+  
+  
+          <div class="form-group mx-sm-3 mb-2">
+          <p class="mt-4">@lang('alnkel.Children') </p>
+          <input type="number" name="children" class="sty-option" min="0">
+          </div>
+  
+          <div class="form-group mx-sm-3 mb-2">
+          <p class="mt-4">@lang('alnkel.baby') </p>
+          <input type="number" name="infants" class="sty-option" min="0">
+  
+          </div>
+  
+          <div class="form-group mx-sm-3 mb-2">
+          <p class="mt-4">@lang('alnkel.cabin_class') </p>
+          <select name="cabin_class">
+              <option value="economy">Economy</option>
+              <option value="business">Business</option>
+          </select>
+          </div>
+  
+  
+  
+  
+          <input type="submit" class=" btn btn-success p-3" value="@lang('alnkel.search')">
+          </form>
+  </div>
+ 
+</div>
     </div>
 
+
+@if(isset($result))
+<div class="table-responsive text-nowrap">
+        <!--Table-->
+        <table class="table table-striped">
+
+          <!--Table head-->
+          <thead>
+            <tr>
+              
+              <th>Flight Date</th>
+              <th>Flight Number	</th>
+             
+              <th>Adult Price</th>
+              <th>Child Price</th>
+              <th>Baby Price</th>
+             
+            </tr>
+          </thead>
+          <!--Table head-->
+
+          <!--Table body-->
+          <tbody>
+          @foreach($result as $item)
+            <tr>
+              <td>{{$item->flight_date}}</td>
+              <td>{{$item->flight_number}}</td>
+ 
+              <td>{{$item->price_adult}}</td>
+              <td>{{$item->price_child}}</td>
+              <td>{{$item->price_baby}}</td>
+ 
+              <th>Business Price</th>
+            </tr>
+          @endforeach
+          </tbody>
+          <!--Table body-->
+
+
+        </table>
+        <!--Table-->
+      </div>
+</section>
+<!--Section: Live preview-->
+@endif
+
+@if(isset($return_result))
+<br><br>
+<h1 style="text-align:center;">Return flights</h1>
+<div class="table-responsive text-nowrap">
+        <!--Table-->
+        <table class="table table-striped">
+        
+                  <!--Table head-->
+                  <thead>
+                    <tr>
+                      
+                      <th>Flight Date</th>
+                      <th>Flight Number	</th>
+                     
+                      <th>Adult Price</th>
+                      <th>Child Price</th>
+                      <th>Baby Price</th>
+                      
+                    </tr>
+                  </thead>
+                  <!--Table head-->
+        
+                  <!--Table body-->
+                  <tbody>
+                  @foreach($return_result as $return_item)
+                    <tr>
+                      <td>{{$return_item->flight_date}}</td>
+                      <td>{{$return_item->flight_number}}</td>
+        
+                     
+                      <td>{{$return_item->price_adult}}</td>
+                      <td>{{$return_item->price_child}}</td>
+                      <td>{{$return_item->price_baby}}</td>
+        
+                      
+                    </tr>
+                  @endforeach
+                  </tbody>
+                  <!--Table body-->
+        
+        
+                </table>
+
+
+        </table>
+        <!--Table-->
+      </div>
+</section>
+<!--Section: Live preview-->
+@endif
 </section>
 
 @section('styles')

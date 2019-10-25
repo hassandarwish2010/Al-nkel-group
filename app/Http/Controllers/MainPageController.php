@@ -83,13 +83,76 @@ class MainPageController extends Controller {
 	public function charter() {
 		$oneWayFlights = Charter::where( 'flight_type', 'OneWay' )->get();
 		$twoWayFlights = Charter::where( 'flight_type', 'RoundTrip' )->get();
-
+		$countries = Country::all();
 //		print_r($oneWayFlights);
 //		die();
-
-		return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights' ) );
+ 
+		return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries' ) );
 	}
 
+	public function searchCharter(Request $request){
+		 
+            
+		 $adddate=new  \Carbon\Carbon($request->traveldate);
+		 $subdate=new  \Carbon\Carbon($request->traveldate);
+		
+
+		$adddate= $adddate->addDays($request->available);
+		$subdate= $subdate->subDays($request->available);
+
+		$adddate= Carbon::parse($adddate)->format('Y-m-d');
+		$subdate= Carbon::parse($subdate)->format('Y-m-d');
+
+		  $seats=$request->adults+$request->children+$request->infants;
+ 
+		  if(isset($request->twoway)){
+			      
+		 $return_adddate=new  \Carbon\Carbon($request->returndate);
+		 $return_subdate=new  \Carbon\Carbon($request->returndate);
+		
+
+		$return_adddate= $return_adddate->addDays($request->available);
+		$return_subdate= $return_subdate->subDays($request->available);
+
+		$return_adddate= Carbon::parse($return_adddate)->format('Y-m-d');
+		$return_subdate= Carbon::parse($return_subdate)->format('Y-m-d');
+
+		$return_query=DB::table('charter')
+							->select('*')
+							->where('from_where',$request->endTo) 
+							->where('to_where',$request->startFrom)
+							->where('flight_type','OneWay')
+							->whereBetween('flight_date',[$return_subdate,$return_adddate]);
+
+			if($request->cabin_class=='business'){
+				$return_result=$return_query->where('business_seats','>=',$seats)->get();
+			}else{
+			    $return_result=$return_query->where('economy_seats','>=',$seats)->get();
+			}
+		  }
+		  $query= DB::table('charter')
+					->select('*')
+					->where('from_where',$request->startFrom) 
+					  ->where('to_where',$request->endTo)
+					  ->where('flight_type','OneWay')
+					  ->whereBetween('flight_date',[$subdate,$adddate]);
+					
+		  if($request->cabin_class=='business'){
+              $result=$query->where('business_seats','>=',$seats)->get();
+		  }else{
+			$result=$query->where('economy_seats','>=',$seats)->get();
+		  }
+	
+		  $oneWayFlights = Charter::where( 'flight_type', 'OneWay' )->get();
+		  $twoWayFlights = Charter::where( 'flight_type', 'RoundTrip' )->get();
+		  $countries = Country::all();
+ 
+   
+		  return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result' ) );
+	}
+
+
+	
 	public function charterCreate(){
 		$countries = Country::all();
 	    return view('front.charter.createCharter',compact('countries'));
