@@ -103,8 +103,14 @@ class MainPageController extends Controller {
 
 		$adddate= Carbon::parse($adddate)->format('Y-m-d');
 		$subdate= Carbon::parse($subdate)->format('Y-m-d');
+		$endCountry= Country::findOrFail($request->endTo);
+		$startCountry= Country::findOrFail($request->startFrom);
+	 
+		$endCountry= $endCountry->name['ar'];
+		$startCountry= $startCountry->name['ar'];
 
 	 
+
 		  $seats=$request->adults+$request->children+$request->infants;
  
 		  if(isset($request->twoway)){
@@ -118,9 +124,13 @@ class MainPageController extends Controller {
 
 		$return_adddate= Carbon::parse($return_adddate)->format('Y-m-d');
 		$return_subdate= Carbon::parse($return_subdate)->format('Y-m-d');
+		
+
+	
 
 		$return_query=DB::table('charter')
-							->select('*')
+							->join('aircraft', 'aircraft.id', '=', 'charter.aircraft_id')
+							->select('charter.*','aircraft.name as aircraft')
 							->where('from_where',$request->endTo) 
 							->where('to_where',$request->startFrom)
 							->where('flight_type','OneWay')
@@ -133,11 +143,12 @@ class MainPageController extends Controller {
 			}
 		  }
 		  $query= DB::table('charter')
-					->select('*')
-					->where('from_where',$request->startFrom) 
-					  ->where('to_where',$request->endTo)
-					  ->where('flight_type','OneWay')
-					  ->whereBetween('flight_date',[$subdate,$adddate]);
+						->join('aircraft', 'aircraft.id', '=', 'charter.aircraft_id')
+						->select('charter.*','aircraft.name as aircraft')
+						->where('from_where',$request->startFrom) 
+						->where('to_where',$request->endTo)
+						->where('flight_type','OneWay')
+						->whereBetween('flight_date',[$subdate,$adddate]);
 					
 		  if($request->cabin_class=='business'){
               $result=$query->where('business_seats','>=',$seats)->get();
@@ -148,11 +159,12 @@ class MainPageController extends Controller {
 		  $oneWayFlights = Charter::where( 'flight_type', 'OneWay' )->get();
 		  $twoWayFlights = Charter::where( 'flight_type', 'RoundTrip' )->get();
 		  $countries = Country::all();
+		
  if(Auth::check()){
  
-	return view('front.charter.createCharter',compact('countries','result','return_result'));
+	return view('front.charter.createCharter',compact('countries','result','return_result','endCountry','startCountry'));
  }else{
-	return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result' ) );
+	return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result','startCountry','endCountry') );
  }
  
 		

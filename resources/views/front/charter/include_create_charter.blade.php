@@ -193,7 +193,18 @@
               
               <th>Flight Date</th>
               <th>Flight Number	</th>
-             
+              <th>Airline</th>
+
+              <th>From</th>
+              <th>TO</th>
+
+              <th>Economy Seats</th>
+             <th>business Seats</th>
+
+             <th>Departure Time</th>
+             <th>Arriaval Time</th>
+
+
               <th>Adult Price</th>
               <th>Child Price</th>
               <th>Baby Price</th>
@@ -208,6 +219,18 @@
             <tr>
               <td>{{$item->flight_date}}</td>
               <td>{{$item->flight_number}}</td>
+              <td>{{$item->aircraft}}</td>
+
+              <td>{{$startCountry}}</td>
+              <td>{{$endCountry}}</td>
+
+              <td>{{$item->economy_seats}}</td>
+              <td>{{$item->business_seats}}</td>
+
+              <td>{{$item->departure_time}}</td>
+              <td>{{$item->arrival_time}}</td>
+
+ 
  
               <td>{{$item->price_adult}}</td>
               <td>{{$item->price_child}}</td>
@@ -241,7 +264,17 @@
                       
                       <th>Flight Date</th>
                       <th>Flight Number	</th>
-                     
+                      <th>AirLine</th>
+
+                      <th>From</th>
+                      <th>TO</th>
+
+                      <th>Economy Seats</th>
+                      <th>business Seats</th>
+
+                      <th>Departure Time</th>
+                      <th>Arriaval Time</th>
+
                       <th>Adult Price</th>
                       <th>Child Price</th>
                       <th>Baby Price</th>
@@ -256,8 +289,18 @@
                     <tr>
                       <td>{{$return_item->flight_date}}</td>
                       <td>{{$return_item->flight_number}}</td>
-        
-                     
+                      <td>{{$return_item->aircraft}}</td>
+
+                    
+                      <td>{{$endCountry}}</td>
+                      <td>{{$startCountry}}</td>
+
+                      <td>{{$return_item->economy_seats}}</td>
+                     <td>{{$return_item->business_seats}}</td>
+
+                     <td>{{$return_item->departure_time}}</td>
+                     <td>{{$return_item->arrival_time}}</td>
+
                       <td>{{$return_item->price_adult}}</td>
                       <td>{{$return_item->price_child}}</td>
                       <td>{{$return_item->price_baby}}</td>
