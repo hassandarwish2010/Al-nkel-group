@@ -54,8 +54,7 @@
                <p class="">@lang('alnkel.Adults') </p>
                <input type="number" name="adults" class="sty-option form-control width70" min="0">
            </div>
-
-
+ 
            <div class="form-group col-sm-2">
                <p class=''>@lang('alnkel.Children') </p>
                <input type="number" name="children" class="sty-option form-control width70" min="0">
@@ -208,6 +207,7 @@
               <th>Adult Price</th>
               <th>Child Price</th>
               <th>Baby Price</th>
+              <th>Action</th>
              
             </tr>
           </thead>
@@ -236,6 +236,21 @@
               <td>{{$item->price_child}}</td>
               <td>{{$item->price_baby}}</td>
  
+              <td>
+                <form method="POST" action="{{route('charterCheckout')}}">
+                {{ csrf_field() }}
+
+                   <input type="hidden" name="charter" value="{{$item->id}}">
+
+                   <input type="hidden" name="flight_class" value="{{$flight_class}}">
+                   <input type="hidden" name="reserve_adults" value="{{$reserve_adults}}">
+                   <input type="hidden" name="reserve_children" value="{{$reserve_children}}">
+                   <input type="hidden" name="reserve_babies" value="{{$reserve_babies}}">
+                   
+
+                   <button type="submit" class="btn btn-primary">Reserve</button>
+                </form>
+              </td>
            
             </tr>
           @endforeach

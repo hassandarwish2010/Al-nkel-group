@@ -109,7 +109,15 @@ class MainPageController extends Controller {
 		$endCountry= $endCountry->name['ar'];
 		$startCountry= $startCountry->name['ar'];
 
-	 
+		$reserve_adults=$request->adults;
+		$reserve_children=$request->children;
+		$reserve_babies=$request->infants;
+		$flight_class=$request->cabin_class;
+
+
+		$isEconomy =$request->cabin_class== "Economy";
+		
+
 
 		  $seats=$request->adults+$request->children+$request->infants;
  
@@ -162,9 +170,9 @@ class MainPageController extends Controller {
 		
  if(Auth::check()){
  
-	return view('front.charter.createCharter',compact('countries','result','return_result','endCountry','startCountry'));
+	return view('front.charter.createCharter',compact('countries','result','return_result','endCountry','startCountry' , 'flight_class','reserve_adults'  ,'reserve_children' ,'reserve_babies'));
  }else{
-	return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result','startCountry','endCountry') );
+	return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result','startCountry','endCountry', 'flight_class','reserve_adults','reserve_children' ,'reserve_babies') );
  }
  
 		
@@ -887,6 +895,8 @@ class MainPageController extends Controller {
 
 
 	public function charterCheckout( Request $request ) {
+
+	 
 		$settings      = Setting::first();
 		$nationalities = Nationality::all();
 
