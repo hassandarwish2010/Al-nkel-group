@@ -76,7 +76,7 @@
 
            <div class="form-group col-sm-2.5">
                <p class=" mt-2 ml-2">Date @required()</p>
-               <input type="text" class="form-control datepicker date-mask" placeholder="__/__/____" name="traveldate" >
+               <input type="date" class="form-control  "   name="traveldate" >
            </div>
 
            <div class="form-group col-sm-2">
@@ -181,7 +181,8 @@
     </div>
 
 
-@if(isset($result))
+@if(isset($result)  )
+
 <div class="table-responsive text-nowrap">
         <!--Table-->
         <table class="table table-striped">
@@ -212,7 +213,7 @@
               <td>{{$item->price_child}}</td>
               <td>{{$item->price_baby}}</td>
  
-              <th>Business Price</th>
+           
             </tr>
           @endforeach
           </tbody>
@@ -226,7 +227,8 @@
 <!--Section: Live preview-->
 @endif
 
-@if(isset($return_result))
+@if(isset($return_result) )
+@if(count($return_result) > 0)
 <br><br>
 <h1 style="text-align:center;">Return flights</h1>
 <div class="table-responsive text-nowrap">
@@ -275,6 +277,7 @@
       </div>
 </section>
 <!--Section: Live preview-->
+@endif
 @endif
 </section>
 

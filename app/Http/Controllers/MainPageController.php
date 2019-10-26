@@ -92,17 +92,19 @@ class MainPageController extends Controller {
 
 	public function searchCharter(Request $request){
 
-
-		 $adddate=new  \Carbon\Carbon($request->traveldate);
-		 $subdate=new  \Carbon\Carbon($request->traveldate);
-		
-
+		$result=[];$return_result=[];
+ 
+		 $adddate=new   Carbon($request->traveldate);
+		 $subdate=new  Carbon($request->traveldate);
+		  
+		 
 		$adddate= $adddate->addDays($request->available);
 		$subdate= $subdate->subDays($request->available);
 
 		$adddate= Carbon::parse($adddate)->format('Y-m-d');
 		$subdate= Carbon::parse($subdate)->format('Y-m-d');
 
+	 
 		  $seats=$request->adults+$request->children+$request->infants;
  
 		  if(isset($request->twoway)){
@@ -147,7 +149,7 @@ class MainPageController extends Controller {
 		  $twoWayFlights = Charter::where( 'flight_type', 'RoundTrip' )->get();
 		  $countries = Country::all();
  
-   
+ 
 		  return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result' ) );
 	}
 
