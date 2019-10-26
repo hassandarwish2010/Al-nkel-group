@@ -24,7 +24,7 @@
 
 <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
-    <form class="form-inline" action="{{url('/oneWay/charter/search')}}"   method="post">
+    <form class="form-inline" action="{{url('/oneWay/charter/search')}}"   method="POST">
        <div class="row">
         {{ csrf_field() }}
            <div class="form-group col-sm-2">

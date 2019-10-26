@@ -300,6 +300,7 @@ Route::group( [
 	'prefix'     => LaravelLocalization::setLocale(),
 	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
 ], function () {
+ 
 	Route::get( '/', 'MainPageController@index' )->name( 'front-home' );
 	Route::get( '/flights', 'MainPageController@flights' )->name( 'flights' );
 	Route::get( '/flights/{flight}', 'MainPageController@singleFlight' )->name( 'singleFlight' );

@@ -91,7 +91,7 @@ class MainPageController extends Controller {
 	}
 
 	public function searchCharter(Request $request){
-
+ 
 		$result=[];$return_result=[];
  
 		 $adddate=new   Carbon($request->traveldate);
@@ -148,9 +148,14 @@ class MainPageController extends Controller {
 		  $oneWayFlights = Charter::where( 'flight_type', 'OneWay' )->get();
 		  $twoWayFlights = Charter::where( 'flight_type', 'RoundTrip' )->get();
 		  $countries = Country::all();
+ if(Auth::check()){
  
+	return view('front.charter.createCharter',compact('countries','result','return_result'));
+ }else{
+	return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result' ) );
+ }
  
-		  return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result' ) );
+		
 	}
 
 
