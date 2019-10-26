@@ -574,11 +574,21 @@ class CharterController extends Controller {
 			if ( ! $passengers or count( $passengers ) == 0 ) {
 				return 'Error';
 			}
+            $priceForOne=$order->flight_class=='Economy'?$charter->price_adult:$charter->business_adult;
+			//dd($priceForOne);
+            $number=$request->get( "number" );
+			$count=count($passengers);
+          //  $priceForOne=$order->price/$number;
+            $subPrice=$order->price - ($priceForOne*$count);
+            //dd($priceForOne);
+            $order->update(['price'=>$subPrice]);
 
 			$pnr = generatePNR();
+			$newPrice=$priceForOne*$count;
 
 			$newOrder      = $order->replicate();
 			$newOrder->pnr = $pnr;
+			$newOrder->price = $newPrice;
 			$newOrder->save();
 
 			foreach ( $passengers as $passenger_id ) {

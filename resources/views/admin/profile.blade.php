@@ -38,12 +38,15 @@
                             <a class="m-card-profile__email m-link" style="display: block;">
                                 {{ Auth::user()->email }}
                             </a>
-                            <span class="m-card-profile__email m-link">
-                                ID: <span style="color:#000000;">{{ Auth::user()->id }}</span>
-                            </span>
-                            <span class="m-card-profile__email m-link">
-                                Balance: <span style="color:#000000;">{{ Auth::user()->balance }}</span>
-                            </span>
+
+                            <br>
+                            <h4 class="m-card-profile__email m-link">
+                                Balance: <span style="color:#fff; font-weight: bold;background-color:#4232ba" class="m-3 p-3">{{ Auth::user()->balance }}</span>
+                            </h4><br><br>
+                            <h4 class="m-card-profile__email m-link">
+                                Commission: <span style="color:#fff; font-weight: bold;background-color:#4232ba" class="m-3 p-3">{{\App\CharterOrders::where('user_id',Auth::user()->id )->sum('commission')}}</span>
+                            </h4>
+
                         </div>
                     </div>
                     <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">

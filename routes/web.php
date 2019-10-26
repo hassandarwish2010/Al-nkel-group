@@ -333,6 +333,7 @@ Route::group( [
 	Route::get( '/flights/{flight}/checkout/complete', 'MainPageController@flightCheckout' )->name( 'flight-checkout-form' );
 
 	Route::post( '/charter/checkout', 'MainPageController@charterCheckout' )->name( 'charterCheckout' );
+    Route::post( '/checkPassport', 'MainPageController@checkPassport' )->name( 'checkPassport' );
 
 	Route::post( '/charter/checkout/complete', 'MainPageController@completeCharterOrder' )->name( 'completeCharterOrder' );
 

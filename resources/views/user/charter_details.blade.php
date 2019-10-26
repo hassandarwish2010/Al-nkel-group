@@ -133,8 +133,9 @@
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="float-right m-portlet__head-tools pt-4">
-                    @foreach(["adult" => "ADULTS", "child" => "CHILDREN", "baby" => "BABIES"] as $age=>$title)
-                        <h5 class="m-portlet__head-text float-right mt-1 ml-4">{{$order->passengers()->where("age", $age)->count() > 0 ? $title. ": " . $order->passengers()->where("age", $age)->count() : null}}</h5>
+                    @foreach(["baby" => "BABIES","child" => "CHILDREN","adult" => "ADULTS"] as $age=>$title)
+                        <h5  class="m-portlet__head-text float-right mt-1 ml-4">{{$order->passengers()->where("age", $age)->count() > 0 ? $title. ": " . $order->passengers()->where("age", $age)->count() : null}}</h5>
+                        <input type="hidden" id="count" value="{{$order->passengers()->where("age", $age)->count()}}">
                     @endforeach
                 </div>
                 <div class="m-portlet__head-title">
@@ -242,8 +243,11 @@
                         <th scope="col">Commission</th>
                     </tr>
                     <tr>
+                        <?php
+                        $charter = \App\Charter::find( $order->charter_id );
+                        ?>
                         <td>${{$order->price}}</td>
-                        <td>${{$order->commission}}</td>
+                        <td>${{calculateCommission( $charter,$order->price )}}</td>
                     </tr>
                 </table>
             </div>
@@ -509,10 +513,13 @@
         // Split passengers
         $('#split-passengers').on('click', function () {
             var selectedPassengers = $("[name=selected_passengers]:checked");
+
+            var number=$('#count').val();
+
             var passengers = selectedPassengers.map(function () {
                 return $(this).val();
             }).get();
-
+           // console.log(passengers);
             if (selectedPassengers.length === 0) {
                 $.alert("You have to select at least one passenger to split!", "Error");
                 return;
@@ -543,7 +550,7 @@
 
                                 return $.ajax({
                                     url: '{{ route('updateCharterOrder',['flight' => $order->charter->id,'order' => $order->id, 'do' => 'split']) }}',
-                                    data: {passengers}
+                                    data: {passengers,number}
                                 }).done(function (response) {
                                     self.buttons.confirm.hide();
                                     self.buttons.cancel.hide();

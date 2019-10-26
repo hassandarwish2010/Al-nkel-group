@@ -146,7 +146,9 @@
                                                                 <label class="d-block">Passport Number @required()</label>
                                                                 <input type="text" class="form-control"
                                                                        name="passport_number[]"
-                                                                       placeholder="Passport Number"/>
+{{--                                                                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"--}}
+                                                                       placeholder="Passport Number" id="passport"/>
+                                                                <input type="hidden" value="{{$charter->id}}" id="charter_id">
                                                             </div>
                                                         </div>
                                                         <div class="col-4">
@@ -300,6 +302,11 @@
     <script src="{{ asset('front-assets/js/jquery.serialize-object.min.js') }}"></script>
 
     <script>
+        // $(document).ready(function(){
+        //     $('input, text').each(function() {
+        //         this.value = '';
+        //     });
+        // });
         // Prefill
         $('input').each(function (i, field) {
             if($(field).hasClass('datepicker')) {
@@ -487,5 +494,71 @@
             }
         });
         @endif
+    </script>
+
+    <script type="text/javascript">
+
+
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            }
+
+        });
+
+
+
+        $('body').on('change', '#passport', function (e) {
+
+            e.preventDefault();
+           var passport=$(this).val();
+           var charter=$('#charter_id').val();
+           //alert(passport);
+            $.ajax({
+
+                type: 'POST',
+
+                url: '{{route('checkPassport')}}',
+
+                data: {passport: passport, charter: charter},
+
+                success: function (data) {
+                    if (data == "true") {
+
+                        $.confirm({
+                            title: 'تم الحجز لهذا العميل على نفس الرحلة من قبل ',
+                            columnClass: 'col-md-6',
+                            buttons: {
+                                ok: {
+                                    btnClass: 'btn-info',
+                                    text: 'الاستمرار على اى حال',
+                                    action: function () {
+
+                                    }
+                                },
+                                cancel: {
+                                    btnClass: 'btn-secondary',
+                                    text: 'العودة للصفحة الرئيسيه',
+                                    action: function () {
+                                        window.location = '{{url("/")}}';
+                                    }
+                                },
+                            }
+                        })
+
+                    }
+                }
+            });
+
+
+
+
+
+        });
+
     </script>
 @endsection

@@ -91,8 +91,8 @@ class MainPageController extends Controller {
 	}
 
 	public function searchCharter(Request $request){
-		 
-            
+
+
 		 $adddate=new  \Carbon\Carbon($request->traveldate);
 		 $subdate=new  \Carbon\Carbon($request->traveldate);
 		
@@ -893,6 +893,26 @@ class MainPageController extends Controller {
 
 		return view( 'front.charter.checkout', compact( 'settings', 'nationalities', 'charter', 'travelers', 'request', 'isEconomy', 'prices', 'total', 'balance', 'canPlaceOrder' ) );
 	}
+
+    public function checkPassport(Request $request){
+        $charter_id=$request->get( "charter" );
+        $passport=$request->get( "passport" );
+        $ids=CharterOrders::where('charter_id',$charter_id)->get();
+        $arr=[];
+        foreach ($ids as $id){
+            array_push($arr,$id->id);
+        }
+        $orders=CharterPassengers::whereIn('order_id',$arr)->get(['passport_number']);
+        $passportArr=[];
+        foreach ($orders as $order){
+            array_push($passportArr,$order->passport_number);
+        }
+        if (in_array($passport,$passportArr)){
+            return 'true';
+        }
+        else return 'false';
+
+    }
 
 	public function completeCharterOrder( Request $request ) {
 
