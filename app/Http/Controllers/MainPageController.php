@@ -15,6 +15,11 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\TravelPreCheckoutRequest;
 use App\Http\Requests\VisaPreCheckoutRequest;
+
+use App\Mail\NewUserNotification;
+use Illuminate\Support\Facades\Mail;
+
+
 use App\Locked;
 use App\Nationality;
 use App\Notifications\Notifier;
@@ -32,7 +37,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -92,6 +97,7 @@ class MainPageController extends Controller {
 
 	public function searchCharter(Request $request){
  
+		 
 		$result=[];$return_result=[];
  
 		 $adddate=new   Carbon($request->traveldate);
@@ -106,6 +112,7 @@ class MainPageController extends Controller {
 		$endCountry= Country::findOrFail($request->endTo);
 		$startCountry= Country::findOrFail($request->startFrom);
 	 
+		 
 		$endCountry= $endCountry->name['ar'];
 		$startCountry= $startCountry->name['ar'];
 
@@ -149,29 +156,36 @@ class MainPageController extends Controller {
 			}else{
 			    $return_result=$return_query->where('economy_seats','>=',$seats)->get();
 			}
-		  }
-		  $query= DB::table('charter')
-						->join('aircraft', 'aircraft.id', '=', 'charter.aircraft_id')
-						->select('charter.*','aircraft.name as aircraft')
-						->where('from_where',$request->startFrom) 
-						->where('to_where',$request->endTo)
-						->where('flight_type','OneWay')
-						->whereBetween('flight_date',[$subdate,$adddate]);
-					
-		  if($request->cabin_class=='business'){
-              $result=$query->where('business_seats','>=',$seats)->get();
 		  }else{
-			$result=$query->where('economy_seats','>=',$seats)->get();
+			  
+			$query= DB::table('charter')
+			->join('aircraft', 'aircraft.id', '=', 'charter.aircraft_id')
+			->select('charter.*','aircraft.name as aircraft')
+			->where('from_where',$request->startFrom) 
+			->where('to_where',$request->endTo)
+			->where('flight_type','OneWay')
+			->whereBetween('flight_date',[$subdate,$adddate]);
+		
+				if($request->cabin_class=='business'){
+				$result=$query->where('business_seats','>=',$seats)->get();
+				}else{
+				$result=$query->where('economy_seats','>=',$seats)->get();
+				}
+
+			 
 		  }
+		
 	
 		  $oneWayFlights = Charter::where( 'flight_type', 'OneWay' )->get();
 		  $twoWayFlights = Charter::where( 'flight_type', 'RoundTrip' )->get();
 		  $countries = Country::all();
 		
  if(Auth::check()){
- 
+	 
+	Mail::to( Auth::user()->email)->send(new NewUserNotification(['data'=>$countries ]));
 	return view('front.charter.createCharter',compact('countries','result','return_result','endCountry','startCountry' , 'flight_class','reserve_adults'  ,'reserve_children' ,'reserve_babies'));
  }else{
+	 
 	return view( 'front.charter.flights', compact( 'oneWayFlights', 'twoWayFlights','countries','result','return_result','startCountry','endCountry', 'flight_class','reserve_adults','reserve_children' ,'reserve_babies') );
  }
  
@@ -243,6 +257,7 @@ class MainPageController extends Controller {
 		return view( 'front.travel.travels', compact( 'travels' ) );
 	}
 
+ 
 	/**
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
@@ -944,6 +959,7 @@ class MainPageController extends Controller {
     }
 
 	public function completeCharterOrder( Request $request ) {
+		 
 
 		$user_id = Auth::user()->id;
 		$charter = Charter::find( $request->charter );
@@ -1044,6 +1060,9 @@ class MainPageController extends Controller {
         ] );
 
         //================== START Commission
+
+		Mail::to( Auth::user()->email)->send(new NewUserNotification(['data'=>	$order  ]));
+		
 
 		$html = view( "front.charter.order_summary", compact( 'tickets', 'pnr' ) )->render();
 

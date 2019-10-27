@@ -79,7 +79,7 @@ return [
     */
 
     'locale' => 'ar',
-
+    'mail_host' => env('MAIL_HOST', 'smtp.mailtrap.io'),
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

@@ -198,7 +198,9 @@
         <h3 class="text-center p-3 btn btn-primary">Flights going</h3>
         <hr>
     </div>
-@if(count($result)>1)
+@if(count($result)>0)
+
+ 
 <div class="table-responsive text-nowrap ">
         <!--Table-->
         <table class="table table-striped table-bordered">
