@@ -215,5 +215,6 @@ return [
     'flight_date'=>'Flight Date',
     'open_r_Validity'=>'Open Return',
     'baby'=>'Baby',
+    'infants'=>'Infants',
     ''=>'',
 ];

@@ -5,6 +5,12 @@
     Author: Mohammed Hamouda
     **********************************
     -->
+<style>
+    .balance-sty{
+        color: #d02716;
+        font-size: 18px;
+    }
+</style>
 <nav class="main-nv">
     <div class="container">
         <div class="row aligen-items">
@@ -22,14 +28,17 @@
                                 <div class="dropdown">
                                     <a class="dropdown-toggle d-flex align-items-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-h"></i>
-                                        <span><i class="fas fa-user"></i> @lang('alnkel.header-hello') : {{auth()->user()->name}} | @lang('alnkel.header-balance') : {{auth()->user()->balance}}</span>
+                                        <span><i class="fas fa-user"></i> @lang('alnkel.header-hello') : {{auth()->user()->name}} </span>
                                     </a>
+
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                         <a class="dropdown-item d-flex align-items-center m-0" href=""><span>@lang('alnkel.header-dashboard')</span></a>
                                         <a class="dropdown-item d-flex align-items-center m-0" href="{{route('history')}}"><span>@lang('alnkel.history')</span></a>
                                         <a class="dropdown-item d-flex align-items-center m-0" href="{{route('front-logout')}}"><span>@lang('alnkel.header-logout')</span></a>
                                     </div>
                                 </div>
+                            </li>
+                            <li>  <span class="balance-sty ">| @lang('alnkel.header-balance') : {{auth()->user()->balance}}</span>
                             </li>
                         @else
                         <li class="login" data-toggle="modal" data-target="#login_modal">

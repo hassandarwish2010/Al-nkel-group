@@ -526,7 +526,7 @@ class UserPortalController extends Controller {
 			$visas        = VisaOrders::orderBy( 'id', 'DESC' )->limit( 5 )->get();
 			//$transactions = Transaction::orderBy( 'id', 'DESC' )->limit( 5 )->get();
 		}
-//dd($transactions);
+//dd($travels);
 		return view( 'user.search.index', compact( 'travels', 'flights', 'visas', 'transactions' ) );
 	}
 
@@ -634,6 +634,7 @@ class UserPortalController extends Controller {
 	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function search( Request $request ) {
+//	    dd($request->all());
 		$travels      = Auth::user()->travelPurchases()
 		                    ->where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
 		                    ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
@@ -649,27 +650,41 @@ class UserPortalController extends Controller {
 		                    ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
 		                    ->orderBy( 'id', 'DESC' )
 		                    ->get();
-		$transactions = Auth::user()->userTransactions()
+		$transactions = Auth::user()->charterPurchases()
 		                    ->where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
 		                    ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
+
 		                    ->orderBy( 'id', 'DESC' )
 		                    ->get();
+		$charters = Auth::user()->userTransactions()
+                                ->where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
+                                ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
+                                ->orderBy( 'id', 'DESC' )
+                                ->get();
 
 		if ( Auth::user()->type === 'Super Admin' ) {
 			$travels      = TravelOrders::where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
 			                            ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
-			                            ->orderBy( 'id', 'DESC' )->get();
+                                         ->where('user_id',$request->user_id)
+                                        ->orderBy( 'id', 'DESC' )->get();
 			$flights      = FlightOrders::where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
 			                            ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
-			                            ->orderBy( 'id', 'DESC' )->get();
+                                        ->where('user_id',$request->user_id)
+                                        ->orderBy( 'id', 'DESC' )->get();
 			$visas        = VisaOrders::where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
 			                          ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
-			                          ->orderBy( 'id', 'DESC' )->get();
+                                        ->where('user_id',$request->user_id)
+                                        ->orderBy( 'id', 'DESC' )->get();
 			$transactions = Transaction::where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
 			                           ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
-			                           ->orderBy( 'id', 'DESC' )->get();
+                                        ->where('from',$request->user_id)->orWhere('to',$request->user_id)
+                                       ->orderBy( 'id', 'DESC' )->get();
+            $charters = CharterOrders::where( 'created_at', '>=', Carbon::parse( $request->from )->format( 'Y-m-d' ) )
+                ->where( 'created_at', '<=', Carbon::parse( $request->to )->format( 'Y-m-d' ) )
+                ->where('user_id',$request->user_id)
+                ->orderBy( 'id', 'DESC' )->get();
 		}
-
-		return view( 'user.search.search', compact( 'travels', 'flights', 'visas', 'transactions' ) );
+ //dd($transactions,$travels,$flights,$visas,$charters);
+		return view( 'user.search.search', compact( 'travels', 'flights', 'visas', 'transactions','charters' ) );
 	}
 }

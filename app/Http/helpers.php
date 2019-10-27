@@ -58,7 +58,9 @@ function generateTicketNumber() {
 
 	return $ticket;
 }
-
+function clean_limit($string, $limit = 20) {
+    return $string = str_limit(html_entity_decode(strip_tags($string)), $limit);
+}
 // Add charter history
 function addCharterHistory( $order_id, $action ) {
 	\App\CharterHistory::create( [
@@ -115,4 +117,6 @@ function deleteModalHTML( $item ) {
         });
     </script>
 	<?php
+
+
 }

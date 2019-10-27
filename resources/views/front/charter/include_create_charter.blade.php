@@ -17,18 +17,17 @@
 
        
     <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">One Way</a></li>
-  <li><a data-toggle="tab" href="#menu1">Two Way</a></li>
- 
-</ul>
+      <li class="active"><a data-toggle="tab" href="#home">One Way</a></li>
+      <li><a data-toggle="tab" href="#menu1">Two Way</a></li>
 
-<div class="tab-content">
+    </ul>
+    <div class="tab-content">
   <div id="home" class="tab-pane fade in active">
     <form class="form-inline" action="{{url('/oneWay/charter/search')}}"   method="POST">
        <div class="row">
         {{ csrf_field() }}
-           <div class="form-group col-sm-2">
-               <p class=" mt-2">@lang('alnkel.from') *</p>
+           <div class="form-group col-sm-3">
+               <p class=" mt-2">@lang('alnkel.from') @required()</p>
                <select class="form-control sel-status" name="startFrom" >
                    @foreach($countries as $country)
                        <option value="{{ $country->id }}"
@@ -38,8 +37,8 @@
                </select>
            </div>
 
-           <div class="form-group col-sm-2">
-               <p class=" mt-2">@lang('alnkel.to') *</p>
+           <div class="form-group col-sm-3">
+               <p class=" mt-2">@lang('alnkel.to') @required()</p>
 
                <select class="form-control sel-status" name="endTo">
                    @foreach($countries as $country)
@@ -50,24 +49,24 @@
                </select>
            </div>
 
-           <div class="form-group col-sm-2">
-               <p class="">@lang('alnkel.Adults') </p>
-               <input type="number" name="adults" class="sty-option form-control width70" min="0">
+           <div class="form-group col-sm-2" >
+               <p class="">@lang('alnkel.Adults')@required() </p>
+               <input type="number" required name="adults" class="sty-option form-control width70" min="0" max="9">
            </div>
  
            <div class="form-group col-sm-2">
-               <p class=''>@lang('alnkel.Children') </p>
-               <input type="number" name="children" class="sty-option form-control width70" min="0">
+               <p class=''>@lang('alnkel.Children')@required() </p>
+               <input type="number" required name="children" class="sty-option form-control width70" min="0" max="9">
            </div>
 
            <div class="form-group col-sm-2">
-               <p class="">@lang('alnkel.baby') </p>
-               <input type="number" name="infants" class="sty-option form-control width70" min="0">
+               <p class="">@lang('alnkel.infants') @required() </p>
+               <input type="number" name="infants" required class="sty-option form-control width70" min="0" max="9">
 
            </div>
            <div class="form-group col-sm-2">
-               <p class="">@lang('alnkel.cabin_class') </p>
-               <select name="cabin_class" class="select-opt p-1 form-control width70">
+               <p class="mt-1">@lang('alnkel.cabin_class') @required() </p>
+               <select name="cabin_class" class="select-opt p-1 form-control h-34 width70">
                    <option value="economy">Economy</option>
                    <option value="business">Business</option>
                </select>
@@ -75,15 +74,15 @@
 
            <div class="form-group col-sm-2.5">
                <p class=" mt-2 ml-2">Date @required()</p>
-               <input type="date" class="form-control  "   name="traveldate" >
+               <input type="date" required class="form-control  "   name="traveldate" >
            </div>
 
            <div class="form-group col-sm-2">
-               <p class="">@lang('alnkel.departure') *</p>
+               <p class="">@lang('alnkel.departure')@required()</p>
 
-               <span><select name="available" class="select-opt p-4 mt-1 form-control">
+               <span><select name="available" class="select-opt h-34 mt-1 form-control">
                     <option value="0" class="text-center">0</option>
-                    <option value="1" class="text-center">+/-1</option>
+                    <option value="1" class="text-center" selected>+/-1</option>
                     <option value="2" class="text-center">+/-2</option>
                     <option value="3" class="text-center">+/-3</option>
                 </select></span>
@@ -101,9 +100,9 @@
           <div class="row">
               {{ csrf_field() }}
               <input type="hidden" name="twoway" value="twoway">
-              <div class="form-group col-sm-2">
-                  <p class=" mt-2">@lang('alnkel.from') *</p>
-                  <select class="form-control sel-status" name="startFrom">
+              <div class="form-group col-sm-3">
+                  <p class=" mt-2">@lang('alnkel.from') @required()</p>
+                  <select class="form-control sel-status" name="startFrom" >
                       @foreach($countries as $country)
                           <option value="{{ $country->id }}"
                           >{{ $country->name['ar'] }}
@@ -112,8 +111,8 @@
                   </select>
               </div>
 
-              <div class="form-group col-sm-2">
-                  <p class=" mt-2">@lang('alnkel.to') *</p>
+              <div class="form-group col-sm-3">
+                  <p class=" mt-2">@lang('alnkel.to') @required()</p>
 
                   <select class="form-control sel-status" name="endTo">
                       @foreach($countries as $country)
@@ -125,52 +124,64 @@
               </div>
 
               <div class="form-group col-sm-2">
-                  <p class=" mt-2">Date *</p>
-                  <input type="date" name="traveldate">
+                  <p class="mt-4">@lang('alnkel.Adults') @required()</p>
+                  <input type="number" name="adults" class="sty-option form-control" min="0" max="9" required>
+              </div>
+
+
+              <div class="form-group col-sm-2">
+                  <p class="mt-4">@lang('alnkel.Children') @required()</p>
+                  <input type="number" name="children" class="sty-option form-control" min="0" max="9" required>
               </div>
 
               <div class="form-group col-sm-2">
-                  <p class=" mt-2">Return Date *</p>
-                  <input type="date" name="returndate">
+                  <p class="mt-4">@lang('alnkel.infants')@required() </p>
+                  <input type="number" name="infants" class="sty-option form-control" min="0" max="9" required>
+
               </div>
 
               <div class="form-group col-sm-2">
-                  <p class="mt-4">@lang('alnkel.departure') *</p>
+                  <p class=" mt-2">Date @required()</p>
+                  <input type="date" required name="traveldate" class="form-control">
+              </div>
+              <div class="form-group col-sm-2">
+                  <p class="">@lang('alnkel.departure')@required()</p>
 
-                  <span><select name="available" class="select-opt">
+                  <span><select name="available_go" class="select-opt form-control h-34">
                       <option value="0">0</option>
-                      <option value="1">+/-1</option>
+                      <option value="1" selected>+/-1</option>
                       <option value="2">+/-2</option>
                       <option value="3">+/-3</option>
                   </select></span>
               </div>
 
               <div class="form-group col-sm-2">
-                  <p class="mt-4">@lang('alnkel.Adults') </p>
-                  <input type="number" name="adults" class="sty-option" min="0">
-              </div>
-
-
-              <div class="form-group col-sm-2">
-                  <p class="mt-4">@lang('alnkel.Children') </p>
-                  <input type="number" name="children" class="sty-option" min="0">
+                  <p class=" mt-2">Return Date @required()</p>
+                  <input type="date" name="returndate" class="form-control" required>
               </div>
 
               <div class="form-group col-sm-2">
-                  <p class="mt-4">@lang('alnkel.baby') </p>
-                  <input type="number" name="infants" class="sty-option" min="0">
+                  <p class="">@lang('alnkel.departure') @required()</p>
 
+                  <span><select name="available" class="select-opt form-control h-34">
+                      <option value="0">0</option>
+                      <option value="1" selected>+/-1</option>
+                      <option value="2">+/-2</option>
+                      <option value="3">+/-3</option>
+                  </select></span>
               </div>
 
               <div class="form-group col-sm-2">
-                  <p class="mt-4">@lang('alnkel.cabin_class') </p>
-                  <select name="cabin_class">
+                  <p class="">@lang('alnkel.cabin_class') </p>
+                  <select name="cabin_class" class="form-control h-34">
                       <option value="economy">Economy</option>
                       <option value="business">Business</option>
                   </select>
               </div>
 
-              <input type="submit" class=" btn btn-success p-3" value="@lang('alnkel.search')">
+              <div class="col-sm-3 mt-5">
+                  <input type="submit" class=" form-control btn btn-success p-2 width70" value="@lang('alnkel.search')">
+              </div>
           </div>
 
       </form>
@@ -179,15 +190,21 @@
 </div>
     </div>
 
+</section>
 
-@if(isset($result)  )
-
-<div class="table-responsive text-nowrap">
+<div class="container m-t100">
+@if(isset($result))
+    <div class="text-center">
+        <h3 class="text-center p-3 btn btn-primary">Flights going</h3>
+        <hr>
+    </div>
+@if(count($result)>1)
+<div class="table-responsive text-nowrap ">
         <!--Table-->
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
 
           <!--Table head-->
-          <thead>
+          <thead class="thead-dark">
             <tr>
               
               <th>Flight Date</th>
@@ -198,16 +215,19 @@
               <th>TO</th>
 
               <th>Economy Seats</th>
-             <th>business Seats</th>
+             <th>Business Seats</th>
 
              <th>Departure Time</th>
              <th>Arriaval Time</th>
 
 
-              <th>Adult Price</th>
-              <th>Child Price</th>
-              <th>Baby Price</th>
-              <th>Action</th>
+              <th>Economy Adult </th>
+              <th>Economy Price</th>
+              <th>Economy Price</th>
+              <th>Business Adult </th>
+              <th>Business Price</th>
+              <th>Business Price</th>
+              <th>{{__('charter.reserve')}}</th>
              
             </tr>
           </thead>
@@ -230,26 +250,30 @@
               <td>{{$item->departure_time}}</td>
               <td>{{$item->arrival_time}}</td>
 
- 
- 
               <td>{{$item->price_adult}}</td>
               <td>{{$item->price_child}}</td>
               <td>{{$item->price_baby}}</td>
+              <td>{{$item->business_adult}}</td>
+              <td>{{$item->business_child}}</td>
+              <td>{{$item->business_baby}}</td>
  
               <td>
-                <form method="POST" action="{{route('charterCheckout')}}">
-                {{ csrf_field() }}
+{{--                <form method="POST" action="{{route('charterCheckout')}}">--}}
+{{--                {{ csrf_field() }}--}}
 
-                   <input type="hidden" name="charter" value="{{$item->id}}">
+{{--                   <input type="hidden" name="charter" value="{{$item->id}}">--}}
 
-                   <input type="hidden" name="flight_class" value="{{$flight_class}}">
-                   <input type="hidden" name="reserve_adults" value="{{$reserve_adults}}">
-                   <input type="hidden" name="reserve_children" value="{{$reserve_children}}">
-                   <input type="hidden" name="reserve_babies" value="{{$reserve_babies}}">
+{{--                   <input type="hidden" name="flight_class" value="{{$flight_class}}">--}}
+{{--                   <input type="hidden" name="reserve_adults" value="{{$reserve_adults}}">--}}
+{{--                   <input type="hidden" name="reserve_children" value="{{$reserve_children}}">--}}
+{{--                   <input type="hidden" name="reserve_babies" value="{{$reserve_babies}}">--}}
                    
-
-                   <button type="submit" class="btn btn-primary">Reserve</button>
-                </form>
+                    @auth
+                        <a class="main-button  charter-reserve" href="#" data-title="Charter #{{$item->id}} ({{$item->name}})" data-id="{{$item->id}}" data-checkout="{{route("charterCheckout")}}">
+                            {{__('charter.reserve')}}
+                        </a>
+                        @endauth
+{{--                </form>--}}
               </td>
            
             </tr>
@@ -261,20 +285,25 @@
         </table>
         <!--Table-->
       </div>
-</section>
-<!--Section: Live preview-->
+
+@else
+    <h3 class="text-center mt-5">No Result</h3>
+    @endif
 @endif
 
 @if(isset($return_result) )
+        <div class="text-center">
+            <h3 class="text-center p-3 btn btn-success">Return flights</h3>
+            <hr>
+        </div>
 @if(count($return_result) > 0)
-<br><br>
-<h1 style="text-align:center;">Return flights</h1>
-<div class="table-responsive text-nowrap">
+
+<div class="table-responsive text-nowrap mt-4">
         <!--Table-->
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
         
                   <!--Table head-->
-                  <thead>
+                  <thead class="thead-dark">
                     <tr>
                       
                       <th>Flight Date</th>
@@ -290,10 +319,13 @@
                       <th>Departure Time</th>
                       <th>Arriaval Time</th>
 
-                      <th>Adult Price</th>
-                      <th>Child Price</th>
-                      <th>Baby Price</th>
-                      
+                        <th>Economy Adult </th>
+                        <th>Economy Price</th>
+                        <th>Economy Price</th>
+                        <th>Business Adult </th>
+                        <th>Business Price</th>
+                        <th>Business Price</th>
+                        <th>{{__('charter.reserve')}}</th>
                     </tr>
                   </thead>
                   <!--Table head-->
@@ -316,10 +348,18 @@
                      <td>{{$return_item->departure_time}}</td>
                      <td>{{$return_item->arrival_time}}</td>
 
-                      <td>{{$return_item->price_adult}}</td>
-                      <td>{{$return_item->price_child}}</td>
-                      <td>{{$return_item->price_baby}}</td>
-        
+                        <td>{{$return_item->price_adult}}</td>
+                        <td>{{$return_item->price_child}}</td>
+                        <td>{{$return_item->price_baby}}</td>
+                        <td>{{$return_item->business_adult}}</td>
+                        <td>{{$return_item->business_child}}</td>
+                        <td>{{$return_item->business_baby}}</td>
+                        <td>@auth
+                                <a class="main-button  charter-reserve" href="#" data-title="Charter #{{$return_item->id}} ({{$return_item->name}})" data-id="{{$return_item->id}}" data-checkout="{{route("charterCheckout")}}">
+                                    {{__('charter.reserve')}}
+                                </a>
+                            @endauth
+                        </td>
                       
                     </tr>
                   @endforeach
@@ -333,11 +373,14 @@
         </table>
         <!--Table-->
       </div>
-</section>
+@else
+    <div>
+        <h3 class="text-center">No Result</h3>
+    </div>
 <!--Section: Live preview-->
 @endif
 @endif
-</section>
+</div>
 
 @section('styles')
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -346,6 +389,12 @@
     <style>
         body{
             background-color: #ececec;;
+        }
+        .m-t100{
+            margin-top: 100px;
+        }
+        .h-34{
+            height: 34px !important;
         }
         .width70{
             width: 70% !important;

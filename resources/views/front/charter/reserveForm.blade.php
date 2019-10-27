@@ -17,7 +17,7 @@
                 <span class="text-success float-right business_price" hidden>${{$charter->business_adult}}</span>
             </label>
             <select class="form-control select2 counter" name="reserve_adults">
-                @for($i=0;$i<=10;$i++)
+                @for($i=0;$i<=9;$i++)
                     <option>{{$i}}</option>
                 @endfor
             </select>
@@ -29,7 +29,7 @@
                 <span class="text-success float-right business_price" hidden>${{$charter->business_child}}</span>
             </label>
             <select class="form-control select2 counter" name="reserve_children">
-                @for($i=0;$i<=10;$i++)
+                @for($i=0;$i<=9;$i++)
                     <option>{{$i}}</option>
                 @endfor
             </select>
@@ -41,7 +41,7 @@
                 <span class="text-success float-right business_price" hidden>${{$charter->business_baby}}</span>
             </label>
             <select class="form-control select2 counter" name="reserve_babies">
-                @for($i=0;$i<=10;$i++)
+                @for($i=0;$i<=9;$i++)
                     <option>{{$i}}</option>
                 @endfor
             </select>

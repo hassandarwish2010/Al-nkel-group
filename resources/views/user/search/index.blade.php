@@ -27,33 +27,45 @@
                     </div>
                 </div>
                 <!--begin::Form-->
-            <!-- <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed"
+             <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed"
                       method="get"
-                      action="{{ route('searchUserHistory') }}" enctype="multipart/form-data"> -->
+                      action="{{ route('searchUserHistory') }}" enctype="multipart/form-data">
                 <div class="m-portlet__body">
                     <div class="form-group m-form__group row">
                         <div class="col-lg-6">
                             <label for="date">
                                 Date (from):
                             </label>
-                        <!-- <input id="date" type="date" name="from" class="form-control m-input"
-                                       value="{{ old('from') }}"> -->
-                            <input name="min" id="min" type="text" class="form-control m-input">
+                        <input id="date" type="date" required name="from" class="form-control m-input"
+                                       value="{{ old('from') }}">
                             <span class="m-form__help">
                                     Please enter valid date
-                                </span>
+                                </span><br>
                         </div>
                         <div class="col-lg-6">
                             <label for="date">
                                 Date (to):
                             </label>
-                        <!-- <input id="date" type="date" name="to" class="form-control m-input"
-                                       value="{{ old('to') }}"> -->
-                            <input name="max" id="max" type="text" class="form-control m-input">
+                        <input id="date" type="date" required name="to" class="form-control m-input"
+                                       value="{{ old('to') }}">
                             <span class="m-form__help">
                                     Please enter valid date
                                 </span>
                         </div>
+                        @if ( Auth::user()->type === 'Super Admin' )
+                        <div class="col-lg-6">
+                            <select class="form-control sel-status" name="user_id" >
+                                @foreach(\App\User::get() as $user)
+                                    <option value="{{ $user->id }}"
+                                    >{{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <span class="m-form__help">
+                                    Please chose user
+                            </span>
+                        </div>
+                            @endif
                     </div>
                 </div>
                 <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
@@ -61,12 +73,12 @@
                         <div class="row">
                             <div class="col-lg-4"></div>
                             <div class="col-lg-8">
-                                <!-- <button type="submit" class="btn btn-primary">
+                               <button type="submit" class="btn btn-primary">
                                     Search
-                                </button> -->
-                            <!-- <a href="{{ route('user-profile') }}" class="btn btn-secondary">
+                                </button>
+                            <a href="{{ route('user-profile') }}" class="btn btn-secondary">
                                         Cancel
-                                    </a> -->
+                                    </a>
                             </div>
                         </div>
                     </div>
@@ -316,6 +328,12 @@
         //
         //
         //     });
+        $(document).ready(function() {
+
+            $(".sel-status").select2();
+
+
+        });
 
     </script>
 @endsection

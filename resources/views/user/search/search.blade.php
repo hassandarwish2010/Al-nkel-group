@@ -18,7 +18,7 @@
 @endsection
 
 @section('content')
-    @if(!$travels->count() && !$flights->count() && !$visas->count())
+    @if(!$travels->count() && !$flights->count() && !$visas->count() && $charters->count())
         <div class="alert m-alert m-alert--default alert-danger" role="alert">
             No records found.
         </div>
@@ -65,6 +65,20 @@
                                     Please enter valid date
                                 </span>
                             </div>
+                            @if ( Auth::user()->type === 'Super Admin' )
+                                <div class="col-lg-6">
+                                    <select class="form-control sel-status" name="user_id" >
+                                        @foreach(\App\User::get() as $user)
+                                            <option value="{{ $user->id }}"
+                                            >{{ $user->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    <span class="m-form__help">
+                                    Please chose user
+                            </span>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -90,6 +104,56 @@
         </div>
     </div>
 
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                        Charter Orders
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            <!--begin: Datatable -->
+
+            <table id="charter-table" class="table table-responsive table-bordered nowrap display" style="width:100%">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Company</th>
+                    <th>Price</th>
+                    <th>Commission</th>
+                    <th>PNR</th>
+                    <th>Phone</th>
+                    <th>Note</th>
+                    <th>Created at</th>
+                    <th>Flight Class</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($charters as $charter)
+                    <tr>
+                        <?php $user=\App\User::where('id',$charter->user_id)->first();
+                        ?>
+                        <td>{{$charter->id}}</td>
+                        <td>{{clean_limit($user->company,20)}}</td>
+                        <td>{{$charter->price}}</td>
+                        <td>{{$charter->commission}}</td>
+                        <td>{{$charter->pnr}}</td>
+                        <td>{{$charter->phone}}</td>
+                        <td>{{$charter->note}}</td>
+                        <td>{{Carbon\Carbon::parse( $charter->created_at )->format( 'Y-m-d' )}}</td>
+                        <td>{{$charter->flight_class}}</td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+
+            <!--end: Datatable -->
+        </div>
+    </div>
     <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
@@ -392,6 +456,8 @@
             <!--end: Datatable -->
         </div>
     </div>
+
+
 @endsection
 
 @section('scripts')
@@ -427,7 +493,7 @@
             });
         });
 
-        
+
 
     </script>
 @endsection
